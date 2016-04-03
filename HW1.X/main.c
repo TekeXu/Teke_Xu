@@ -73,6 +73,10 @@ int main() {
         while(_CP0_GET_COUNT() < 96000){     // wati 0.5ms
             ;
         }
+        // wait for the pushbutton
+        while(B4 == 0){                      // infinit loop
+            ;
+        }
 
     }
     
