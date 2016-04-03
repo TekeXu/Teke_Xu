@@ -38,7 +38,7 @@
 
 
 int main() {
-
+    //int i = 0;
     __builtin_disable_interrupts();
 
     // set the CP0 CONFIG register to indicate that kseg0 is cacheable (0x3)
@@ -64,7 +64,18 @@ int main() {
     while(1) {
 	    // use _CP0_SET_COUNT(0) and _CP0_GET_COUNT() to test the PIC timing
 		// remember the core timer runs at half the CPU speed
+        _CP0_SET_COUNT(0);                   // set core timer to 0
+        LATAbits.LATA4 = 1;                  // intialize LED on
+        while(_CP0_GET_COUNT() < 48000){     // wait 0.5ms
+            ;
+        }
+        LATAbits.LATA4 = 0;                  // set led 0
+        while(_CP0_GET_COUNT() < 96000){     // wati 0.5ms
+            ;
+        }
+
     }
     
     
 }
+
