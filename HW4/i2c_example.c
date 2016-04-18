@@ -1,4 +1,4 @@
-#include "i2c_slave.h"
+#include "i2c_master.h"
 #include "i2c_master_noint.h"
 // Demonstrate I2C by having the I2C1 talk to I2C5 on the same PIC32 (PIC32MX795F512H)
 // Master will use SDA1 (D9) and SCL1 (D10).  Connect these through resistors to
