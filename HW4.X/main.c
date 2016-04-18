@@ -37,9 +37,12 @@
 #pragma config FVBUSONIO = ON // USB BUSON controlled by USB module
 
 #define CS LATBbits.LATB7       // chip select pin
+void initSPI1(void);
+void initI2C2(void);
+int value = 0;
 
 int main() {
-    int value = 0;
+    //int value = 0;
     __builtin_disable_interrupts();
 
     // set the CP0 CONFIG register to indicate that kseg0 is cacheable (0x3)
@@ -108,7 +111,7 @@ void initSPI1(void){
 
 
 void initI2C2(void){
-    I2C2BRG = some number for 100kHz;            // I2CBRG = [1/(2*Fsck) - PGD]*Pblck - 2 
+    //I2C2BRG = some number for 100kHz;            // I2CBRG = [1/(2*Fsck) - PGD]*Pblck - 2 
                                     // look up PGD for your PIC32
     I2C2CONbits.ON = 1;               // turn on the I2C2 module
 }
