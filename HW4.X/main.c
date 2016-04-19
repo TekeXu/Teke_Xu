@@ -1,6 +1,6 @@
 #include <xc.h>           // processor SFR definitions
 #include <sys/attribs.h>  // __ISR macro
-
+#include <math.h>
 // DEVCFG0
 #pragma config DEBUG = OFF // no debugging
 #pragma config JTAGEN = OFF // no jtag
@@ -37,12 +37,22 @@
 #pragma config FVBUSONIO = ON // USB BUSON controlled by USB module
 
 #define CS LATBbits.LATB7       // chip select pin
+#define PI 3.14159
 void initSPI1(void);
 void initI2C2(void);
+char SPI1_IO(char write);
+void setVoltage(char channel, char voltage);
+void makewave(void);
+
 int value = 0;
+int sinewave[100];
+int triangle_wave[200];
 
 int main() {
     //int value = 0;
+    makewave();
+    int count1 = 0;
+    int count2 = 0;
     __builtin_disable_interrupts();
 
     // set the CP0 CONFIG register to indicate that kseg0 is cacheable (0x3)
@@ -72,10 +82,19 @@ int main() {
 	    // use _CP0_SET_COUNT(0) and _CP0_GET_COUNT() to test the PIC timing
 		// remember the core timer runs at half the CPU speed
         _CP0_SET_COUNT(0);                   // set core timer to 0
-        while(_CP0_GET_COUNT() < 6000){     // wait 1ms
+        while(_CP0_GET_COUNT() < 6000){     // wait 1ms / 0.001s
             ;
         }
-
+        setVoltage(0,sinewave[count1]);
+        setVoltage(1,triangle_wave[count2]);
+        count1++;
+        count2++;
+        if(count1 == 100){
+          count1 = 0;
+        }
+        if(count2 == 200){
+          count2 = 0;
+        }
     }
     
     
@@ -87,7 +106,7 @@ void initSPI1(void){
   // the chip select pin is used by the sram to indicate
   // when a command is beginning (clear CS to low) and when it
   // is ending (set CS high)
-  TRISBbits.TRISB14 = 0;    // output master clock
+  //TRISBbits.TRISB14 = 0;    // output master clock
   TRISBbits.TRISB7 = 0;     // set RB7 output : chip selection
   TRISBbits.TRISB8 = 0;     // set RB8 output : SDO1
                             // set RB9 output : SDI1(no need)
@@ -147,4 +166,14 @@ void setVoltage(char channel, char voltage){    //channel 0 for voutA, 1 for vou
 
 char getExpander(void){
 
+}
+
+void makewave(void){
+  int i;
+  for(i = 0; i < 100; i++){
+    sinewave[i] = (int)(2048.0 + 2048.0 * sin(PI * 0.02 * i));
+  }
+  for(i = 0; i < 200; i++){
+    triangle_wave[i] = (int)(2.048 * i);
+  }
 }
