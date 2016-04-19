@@ -41,10 +41,10 @@
 void initSPI1(void);
 void initI2C2(void);
 char SPI1_IO(char write);
-void setVoltage(char channel, char voltage);
+void setVoltage(unsigned char channel, unsigned char voltage);
 void makewave(void);
 
-int value = 0;
+//int value = 0;
 int sinewave[100];
 int triangle_wave[200];
 
@@ -82,7 +82,16 @@ int main() {
 	    // use _CP0_SET_COUNT(0) and _CP0_GET_COUNT() to test the PIC timing
 		// remember the core timer runs at half the CPU speed
         _CP0_SET_COUNT(0);                   // set core timer to 0
-        while(_CP0_GET_COUNT() < 6000){     // wait 1ms / 0.001s
+        while(_CP0_GET_COUNT() < 24000){     // wait 1ms / 0.001s
+            ;
+        }
+        while(_CP0_GET_COUNT() < 24000){     // wait 1ms / 0.001s
+            ;
+        }
+        while(_CP0_GET_COUNT() < 24000){     // wait 1ms / 0.001s
+            ;
+        }
+        while(_CP0_GET_COUNT() < 24000){     // wait 1ms / 0.001s
             ;
         }
         setVoltage(0,sinewave[count1]);
@@ -96,7 +105,10 @@ int main() {
           count2 = 0;
         }
     }
-    
+        //CS = 0;                                 // listen to me
+        //SPI1_IO(0x38); // most significant byte of address
+        //SPI1_IO(0x00);         // the least significant address byte
+        //CS = 1;   
     
 }
 
@@ -147,16 +159,17 @@ void initExpander(void){
 
 }
 
-void setVoltage(char channel, char voltage){    //channel 0 for voutA, 1 for voutB
+void setVoltage(unsigned char channel, unsigned char voltage){    //channel 0 for voutA, 1 for voutB
+    unsigned short value = 0;
     if(channel == 0){
-        value = 0b0011 << 12 + voltage << 4;
+      value = (0b0011 << 12) + (voltage << 4);
         CS = 0;                                 // listen to me
         SPI1_IO((value & 0xFF00) >> 8 ); // most significant byte of address
         SPI1_IO(value & 0x00FF);         // the least significant address byte
         CS = 1;                          // end
     }
     if (channel == 1){
-        value = 0b1011 << 12 + voltage << 4;
+      value = (0b1011 << 12) + (voltage << 4);
         CS = 0;
         SPI1_IO((value & 0xFF00) >> 8 ); // most significant byte of address
         SPI1_IO(value & 0x00FF);         // the least significant address byte
@@ -171,9 +184,9 @@ char getExpander(void){
 void makewave(void){
   int i;
   for(i = 0; i < 100; i++){
-    sinewave[i] = (int)(2048.0 + 2048.0 * sin(PI * 0.02 * i));
+    sinewave[i] = (int)(128.0 + 127.5 * sin(PI * 0.02 * i));
   }
   for(i = 0; i < 200; i++){
-    triangle_wave[i] = (int)(2.048 * i);
+    triangle_wave[i] = (int)(1.28 * i);
   }
 }
