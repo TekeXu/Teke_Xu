@@ -52,6 +52,7 @@ void i2c_master_stop(void);               // send a stop
 void init_ctrl1(void);
 void init_ctrl2(void);
 void init_ctrl3(void);
+void init_OC(void);
 void I2C_read_multiple(char address, char reg_addr, unsigned char * data, char length);
 
 
@@ -93,7 +94,7 @@ int main() {
     init_ctrl1();
     init_ctrl2();
     init_ctrl3();
-    
+    init_OC();
     __builtin_enable_interrupts();
     
     while(1) {
@@ -304,18 +305,18 @@ void init_OC(void){
   RPA0Rbits.RPA0R = 0b0101; // assign RA0 for OC1
   RPA1Rbits.RPA1R = 0b0101; // assign RA1 for OC2
 
-  T2CONbits.TCKPS = 0b011;     // prescale = 8
-  PR2 = 5999;                  // period = (PR2 + 1) * N * ns = ?   1kHz
+  T2CONbits.TCKPS = 0b011;     // prescale = 8 / N = 8
+  PR2 = 5999;                  // period = (PR2 + 1) * N * ? ns = ?  / 1kHz
   OC1RS = 3000;                // duty cycle = OC1RS/(PR2+1) = 50%
   OC2RS = 3000;
   TMR2 = 0;
-  OC1CONbits.OCM = 0b110;
-  OC2CONbits.OCM = 0b110;
+  OC1CONbits.OCM = 0b110;   // PWM
+  OC2CONbits.OCM = 0b110;   // PWM
   OC1CONbits.OCTSEL = 0;  // use timer2 for OC1
   OC2CONbits.OCTSEL = 0;  // use timer2 for OC2
-  T2CONbits.ON = 1;
-  OC1CONbits.ON = 1;
-  OC2CONbits.ON = 1;
+  T2CONbits.ON = 1;       // turn on time2
+  OC1CONbits.ON = 1;      // turn on OC1
+  OC2CONbits.ON = 1;      // turn on OC2
 
 
 }
