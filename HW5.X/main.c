@@ -63,8 +63,8 @@ void display_character(unsigned short x, unsigned short y, unsigned short color,
 //int triangle_wave[200];
 int j,ii,jj;
 unsigned char data_array[14];
-unsigned short temp, gyroX, gyroY, gyroZ, accelX, accelY, accelZ;
-
+short temp, gyroX, gyroY, gyroZ, accelX, accelY, accelZ;
+float modified[7];
 int main() {
     //int value = 0;
     //char r;
@@ -101,7 +101,7 @@ int main() {
     __builtin_enable_interrupts();
     // LCD test here
     LCD_clearScreen(WHITE);
-    sprintf(message, "Hello World 1337!");
+    sprintf(message, "Hello World %d!", 1337);
     int k = 0;
     while(message[k]){
       display_character(28 + k * 5,32,BLACK,message[k]); 
@@ -122,12 +122,32 @@ int main() {
     while(1) {
 	    // use _CP0_SET_COUNT(0) and _CP0_GET_COUNT() to test the PIC timing
 		// remember the core timer runs at half the CPU speed
-        /*_CP0_SET_COUNT(0);                   // set core timer to 0
-        while(_CP0_GET_COUNT() < 480000){     // wait 1ms / 0.001s
+        //_CP0_SET_COUNT(0);                   // set core timer to 0
+        //while(_CP0_GET_COUNT() < 9600000){     // wait 1ms / 0.001s
+          //  ;
+        //}
+        //I2C_read_multiple(0x6B, 0x20, unsigned char * data, 14);
+        int kk; 
+        I2C_read_multiple(0x6B, 0x20, data_array, 14);
+        
+        LCD_setAddr(58, 41, 100, 121);
+        for (kk = 0; kk < (42 * 80); kk++){
+          LCD_data16(WHITE);
+        }
+        for (kk = 0; kk < 7; kk++){
+          sprintf(message, "%4.4f", modified[kk]);
+          k = 0;
+          while(message[k]){
+          display_character(58 + k * 5, 41 + 9 * kk, BLACK, message[k]); 
+          k++;
+          }
+        }
+
+        _CP0_SET_COUNT(0);                   // set core timer to 0
+
+        while(_CP0_GET_COUNT() < 9600000){     // wait 1ms / 0.001s
             ;
-        }*/
-        ;
-        //I2C_read_multiple(0x6B, 0x20, data_array, 14);
+        }
 
     }
     
@@ -195,16 +215,23 @@ void I2C_read_multiple(char address, char reg_addr, unsigned char * data, char l
     *(data + j) = i2c_master_recv();
     i2c_master_ack(0); // make the ack so the slave knows we got it
   }
-  *(data + length) = i2c_master_recv();
+  *(data + j) = i2c_master_recv();
   i2c_master_ack(1);
   i2c_master_stop(); // make the stop bit
-  temp = data_array[0] << 8 | data_array[1];
-  gyroX = data_array[2] << 8 | data_array[3];
-  gyroY = data_array[4] << 8 | data_array[5];
-  gyroZ = data_array[6] << 8 | data_array[7];
-  accelX = data_array[8] << 8 | data_array[9];
-  accelY = data_array[10] << 8 | data_array[11];
-  accelZ = data_array[12] << 8 | data_array[13];
+  temp = data_array[0] | (data_array[1] << 8);
+  gyroX = data_array[2] | (data_array[3] << 8);
+  gyroY = data_array[4] | (data_array[5] << 8);
+  gyroZ = data_array[6] | (data_array[7] << 8);
+  accelX = data_array[8] | (data_array[9] << 8);
+  accelY = data_array[10] | (data_array[11] << 8);
+  accelZ = data_array[12] | (data_array[13] << 8);
+  modified[0] = 25 + (temp / 16.0);
+  modified[1] = 245 * gyroX / 32768.0;
+  modified[2] = 245 * gyroY / 32768.0;
+  modified[3] = 245 * gyroZ / 32768.0;
+  modified[4] = 20 * accelX / 32768.0;
+  modified[5] = 20 * accelY / 32768.0;
+  modified[6] = 20 * accelZ / 32768.0;
 }
 
 
