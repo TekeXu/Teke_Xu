@@ -1,0 +1,3 @@
+CHANGED,/Users/Brett_Xu/Desktop/AndroidStudioProjects/usb-serial-for-android-master/usbSerialExamples/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/hoho/android/usbserial/examples/SerialConsoleActivity$override.class
+CHANGED,/Users/Brett_Xu/Desktop/AndroidStudioProjects/usb-serial-for-android-master/usbSerialExamples/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/android/tools/fd/runtime/AppPatchesLoaderImpl.class
+CHANGED,/Users/Brett_Xu/Desktop/AndroidStudioProjects/usb-serial-for-android-master/usbSerialExamples/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/hoho/android/usbserial/examples/SerialConsoleActivity$4$override.class

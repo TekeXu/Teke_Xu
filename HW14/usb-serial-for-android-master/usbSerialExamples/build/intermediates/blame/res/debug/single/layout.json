@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/Brett_Xu/Desktop/AndroidStudioProjects/usb-serial-for-android-master/usbSerialExamples/build/intermediates/res/merged/debug/layout/main.xml",
+        "source": "/Users/Brett_Xu/Desktop/AndroidStudioProjects/usb-serial-for-android-master/usbSerialExamples/src/main/res/layout/main.xml"
+    },
+    {
+        "merged": "/Users/Brett_Xu/Desktop/AndroidStudioProjects/usb-serial-for-android-master/usbSerialExamples/build/intermediates/res/merged/debug/layout/serial_console.xml",
+        "source": "/Users/Brett_Xu/Desktop/AndroidStudioProjects/usb-serial-for-android-master/usbSerialExamples/src/main/res/layout/serial_console.xml"
+    }
+]

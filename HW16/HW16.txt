@@ -1,0 +1,26 @@
+I used only one slider in the app for adjusting the threshold of the tracking line.
+
+The original value of "COM" is sent to the PIC, then it is processed in the PIC as follows:
+
+				if (qq >= 480){
+                    OC2RS = 10.0 / 10.0 * 6000;
+                    OC1RS = 2.0 / 10.0 * 6000;
+                }
+                if (qq >= 340 && qq < 480){
+                    OC2RS = 8.0 / 10.0 * 6000;
+                    OC1RS = 3.0 / 10.0 * 6000;
+                }
+                if (qq > 300 && qq < 340){
+                    OC2RS = 8.0 / 10.0 * 6000;
+                    OC1RS = 8.0 / 10.0 * 6000;
+                }
+                if (qq > 160 && qq <= 300){
+                    OC2RS = 3.0 / 10.0 * 6000;
+                    OC1RS = 8.0 / 10.0 * 6000;
+                }
+                if (qq <= 160){
+                    OC2RS = 2.0 / 10.0 * 6000;
+                    OC1RS = 10.0 / 10.0 * 6000;
+                }
+of which PR = 6000.
+
