@@ -1,0 +1,6 @@
+CHANGED,D:\ME433\usb-serial-for-android-master\usbSerialExamples\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\hoho\android\usbserial\examples\DeviceListActivity$override.class
+CHANGED,D:\ME433\usb-serial-for-android-master\usbSerialExamples\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\hoho\android\usbserial\examples\DeviceListActivity$2$override.class
+CHANGED,D:\ME433\usb-serial-for-android-master\usbSerialExamples\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\hoho\android\usbserial\examples\DeviceListActivity$4$override.class
+CHANGED,D:\ME433\usb-serial-for-android-master\usbSerialExamples\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\hoho\android\usbserial\examples\DeviceListActivity$3$override.class
+CHANGED,D:\ME433\usb-serial-for-android-master\usbSerialExamples\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\hoho\android\usbserial\examples\DeviceListActivity$1$override.class
+CHANGED,D:\ME433\usb-serial-for-android-master\usbSerialExamples\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class

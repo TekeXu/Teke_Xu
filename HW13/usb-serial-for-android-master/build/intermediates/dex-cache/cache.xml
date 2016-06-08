@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\ME433\usb-serial-for-android-master\usbSerialExamples\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="19.1.0"
+        sha1="852b61c840c96103aaae66245a4ce1e8530b2aac">
+        <dex dex="D:\ME433\usb-serial-for-android-master\usbSerialExamples\build\intermediates\pre-dexed\debug\instant-run-bootstrap_f704b9b44c104d75a9f92513b8943559a2c3260d.jar" />
+    </item>
+    <item
+        jar="D:\ME433\usb-serial-for-android-master\usbSerialExamples\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="19.1.0"
+        sha1="95729061102978ab540f2e9f494a6fbbc40f7444">
+        <dex dex="D:\ME433\usb-serial-for-android-master\usbSerialExamples\build\intermediates\pre-dexed\debug\instant-run_21c6422a89a21feefacf12fd729e5e1d0cac316d.jar" />
+    </item>
+
+</items>
